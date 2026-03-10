@@ -38,3 +38,9 @@ alias ll='ls -lah'
 alias gs='git status -sb'
 alias gl='git log --oneline --decorate --graph -20'
 alias gcob='git checkout -b'
+alias tma='tmux new -A -s main'
+
+# Usage: mhost user@host
+mhost() {
+  mosh "$1" -- tmux new -A -s main
+}

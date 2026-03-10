@@ -1,0 +1,20 @@
+# ~/.ssh/config managed by ~/repo/environments/dotfiles/ssh/config
+
+Host *
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  TCPKeepAlive yes
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+
+# Example host
+# Host home
+#   HostName your.server.tld
+#   User youruser
+#   Port 22
+#   IdentityFile ~/.ssh/id_ed25519
+
+# Mosh note:
+# mosh still performs initial auth over SSH, so this config helps both ssh and mosh.
+# Ensure server firewall allows UDP 60000:61000 for mosh.
