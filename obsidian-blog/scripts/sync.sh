@@ -5,7 +5,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1091
 source "$SCRIPT_DIR/config.sh"
 
-mkdir -p "$SITE_CONTENT_DIR"
+DEST_DIR="${1:-}"
+if [[ -z "$DEST_DIR" ]]; then
+  echo "Usage: $0 <destination-content-dir>"
+  exit 1
+fi
+
+mkdir -p "$DEST_DIR"
 
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
@@ -27,6 +33,6 @@ if [[ "$ONLY_PUBLISHED" == "true" ]]; then
   done < <(find "$TMP_DIR/content" -type f -name '*.md' -print0)
 fi
 
-rsync -a --delete "$TMP_DIR/content/" "$SITE_CONTENT_DIR/"
+rsync -a --delete "$TMP_DIR/content/" "$DEST_DIR/"
 
-echo "Synced Obsidian content to: $SITE_CONTENT_DIR"
+echo "Synced Obsidian content to: $DEST_DIR"

@@ -2,8 +2,9 @@
 
 This setup lets you:
 - write in Obsidian (`~/Obsidian/valhalla/Publishing`)
-- sync selected markdown into this repo
-- publish with one script (`scripts/publish.sh`)
+- clone your target Quartz repo into a temp folder
+- sync selected markdown into that temp clone
+- commit + push, then delete the temp folder automatically
 
 ## Current rules
 - Includes: `Publishing/Essays`, `Publishing/Notes`
@@ -11,8 +12,8 @@ This setup lets you:
 - Publishes only files with frontmatter line: `status: published`
 
 ## Scripts
-- `scripts/sync.sh` — copy filtered content into `obsidian-blog/site/content`
-- `scripts/publish.sh` — sync + git add/commit/push
+- `scripts/sync.sh <dest>` — copy filtered content into any destination content dir
+- `scripts/publish.sh` — temp-clone target repo, sync into `content/`, commit + push, cleanup
 
 ## Quick start
 ```bash
