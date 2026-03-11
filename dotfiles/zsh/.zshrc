@@ -13,6 +13,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # --- History: long, shared, and useful ---
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000000
