@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(sudo docker:*)",
+      "Bash(docker compose:*)",
+      "Bash(systemctl:*)",
+      "Bash(journalctl:*)",
+      "Bash(sudo ss:*)",
+      "Bash(openssl rand:*)",
+      "WebSearch"
+    ]
+  }
+}

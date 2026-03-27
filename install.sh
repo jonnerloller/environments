@@ -24,7 +24,7 @@ if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlightin
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 fi
 
-echo "[4/6] Linking dotfiles from repo..."
+echo "[4/7] Linking dotfiles from repo..."
 mkdir -p "$HOME/.ssh"
 ln -sf "$REPO_DIR/dotfiles/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$REPO_DIR/dotfiles/tmux/.tmux.conf" "$HOME/.tmux.conf"
@@ -32,11 +32,20 @@ ln -sf "$REPO_DIR/dotfiles/ssh/config" "$HOME/.ssh/config"
 chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/config"
 
-echo "[5/6] Making zsh your default shell..."
+echo "[5/7] Linking AI agent configs..."
+# Claude Code — symlink individual config files (not the whole dir)
+mkdir -p "$HOME/.claude"
+ln -sf "$REPO_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+ln -sf "$REPO_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+ln -sfn "$REPO_DIR/.claude/commands" "$HOME/.claude/commands"
+# LLMs — tool-agnostic rules/skills (whole directory)
+ln -sfn "$REPO_DIR/.llms" "$HOME/.llms"
+
+echo "[6/7] Making zsh your default shell..."
 if command -v zsh >/dev/null 2>&1; then
   chsh -s "$(command -v zsh)" "$USER" || true
 fi
 
-echo "[6/6] Notes"
+echo "[7/7] Notes"
 echo "For mosh on servers, allow UDP 60000-61000 (e.g., sudo ufw allow 60000:61000/udp)."
 echo "Done. Restart terminal (or run: exec zsh)."

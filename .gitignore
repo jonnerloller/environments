@@ -1,0 +1,24 @@
+# Secrets and auth — never commit
+.env
+*.key
+*.pem
+*.credentials.json
+**/secrets/
+**/tokens/
+
+# Claude local-only files
+.claude/settings.local.json
+.claude/.credentials.json
+.claude/history.jsonl
+.claude/projects/
+.claude/cache/
+.claude/backups/
+.claude/debug/
+.claude/file-history/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/telemetry/
+.claude/todos/
+.claude/ide/
+.claude/plugins/
+.claude/mcp-needs-auth-cache.json
