@@ -4,7 +4,7 @@ These rules apply to any AI agent operating on phitrine's homelab infrastructure
 
 ## Docker
 - All services go in `~/docker/<service-name>/` with their own `docker-compose.yml`
-- Docker requires `sudo` on this system
+- Docker works without `sudo` (user is in the docker group)
 - Use `restart: unless-stopped` for all services
 - Check port conflicts before assigning new ports
 

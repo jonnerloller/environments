@@ -40,6 +40,12 @@ ln -sf "$REPO_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
 ln -sfn "$REPO_DIR/.claude/commands" "$HOME/.claude/commands"
 # LLMs — tool-agnostic rules/skills (whole directory)
 ln -sfn "$REPO_DIR/.llms" "$HOME/.llms"
+# Codex — keep local state in ~/.codex, but discover shared skills from ~/.llms
+mkdir -p "$HOME/.codex/skills"
+for skill_dir in "$REPO_DIR/.llms/skills"/*; do
+  [ -d "$skill_dir" ] || continue
+  ln -sfn "$skill_dir" "$HOME/.codex/skills/$(basename "$skill_dir")"
+done
 
 echo "[6/7] Making zsh your default shell..."
 if command -v zsh >/dev/null 2>&1; then

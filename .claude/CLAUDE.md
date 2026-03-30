@@ -2,7 +2,7 @@
 
 ## Environment
 - Server: phi-0 (homelab)
-- Docker requires `sudo`
+- Docker works without `sudo` (user is in the docker group)
 - All Docker services live in `~/docker/<service-name>/`, each with their own `docker-compose.yml`
 
 ## Homelab Conventions

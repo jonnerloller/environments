@@ -8,6 +8,10 @@ Host *
   ControlPath ~/.ssh/cm-%r@%h:%p
   ControlPersist 10m
 
+Host github.com
+  HostName github.com
+  IdentityFile ~/.ssh/id_git
+  AddKeysToAgent yes
 # Example host
 # Host home
 #   HostName your.server.tld
