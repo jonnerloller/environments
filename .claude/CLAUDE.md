@@ -12,6 +12,10 @@
 - DNS: 10.0.0.1
 - Running services: Homepage (:3000), Immich (:2283), Plex, TrueNAS, Proxmox, AirTrail (:3001)
 
+## Git
+- Always use SSH URLs for git remotes, never HTTPS. If a repo uses HTTPS, switch it to SSH (`git remote set-url origin git@github.com:<owner>/<repo>.git`).
+- Per-repo exceptions will be noted in that repo's CLAUDE.md.
+
 ## Code Style
 - Keep it simple. No over-engineering.
 - Prefer shell scripts for automation tasks.
