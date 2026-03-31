@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 # Sync environments repo and re-apply symlinks for the current machine.
 # Safe to run anytime — only creates/updates symlinks, never deletes data.
+#
+# When called from a PreToolUse hook, pass --once to skip if already run
+# this Claude session (keyed on $PPID so each session runs it exactly once).
 set -euo pipefail
+
+if [[ "${1:-}" == "--once" ]]; then
+  LOCK="/tmp/reinit_env_done_${PPID}"
+  [[ -f "$LOCK" ]] && exit 0
+  touch "$LOCK"
+fi
 
 REPO_DIR="${HOME}/repo/environments"
 

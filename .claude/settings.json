@@ -1,11 +1,11 @@
 {
   "hooks": {
-    "UserPromptSubmit": [
+    "PreToolUse": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "bash $HOME/repo/environments/scripts/reinit_env.sh"
+            "command": "bash $HOME/repo/environments/scripts/reinit_env.sh --once"
           }
         ]
       }
