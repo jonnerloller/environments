@@ -36,14 +36,9 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # --- Machine-specific paths ---
-case "$(hostname)" in
-  phitrine-mbp*)
-    export OBSIDIAN_VAULT="$HOME/Documents/valhalla"
-    ;;
-  *)
-    export OBSIDIAN_VAULT="$HOME/Obsidian/valhalla"
-    ;;
-esac
+_machine_env="$HOME/repo/environments/machines/$(hostname -s).env"
+[[ -f "$_machine_env" ]] && set -a && source "$_machine_env" && set +a
+unset _machine_env
 
 # Handy aliases
 alias ll='ls -lah'

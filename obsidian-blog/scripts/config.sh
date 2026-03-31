@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Edit these paths if your vault/repo locations change.
-VAULT_PUBLISH_DIR="${VAULT_PUBLISH_DIR:-${OBSIDIAN_VAULT:-$HOME/Obsidian/valhalla}/Publishing}"
+VAULT_PUBLISH_DIR="${VAULT_PUBLISH_DIR:-${SECOND_BRAIN_VAULT:-$HOME/Obsidian/valhalla}/Publishing}"
 
 # Target publish repo (Quartz site)
 TARGET_REPO_SSH="${TARGET_REPO_SSH:-git@github.com:jonnerloller/braindump.git}"

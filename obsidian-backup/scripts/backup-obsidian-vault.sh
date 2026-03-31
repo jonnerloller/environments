@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Obsidian vault backup (clone -> copy -> commit -> push -> delete clone)
 REPO_URL="git@github.com:jonnerloller/obsidian_backup.git"
-VAULT_DIR="${OBSIDIAN_VAULT:-$HOME/Obsidian/valhalla}"
+VAULT_DIR="${SECOND_BRAIN_VAULT:-$HOME/Obsidian/valhalla}"
 BRANCH="main"
 
 TMP_DIR="$(mktemp -d)"
