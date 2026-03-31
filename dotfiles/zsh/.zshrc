@@ -35,6 +35,16 @@ zmodload zsh/complist
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# --- Machine-specific paths ---
+case "$(hostname)" in
+  phitrine-mbp*)
+    export OBSIDIAN_VAULT="$HOME/Documents/valhalla"
+    ;;
+  *)
+    export OBSIDIAN_VAULT="$HOME/Obsidian/valhalla"
+    ;;
+esac
+
 # Handy aliases
 alias ll='ls -lah'
 alias gs='git status -sb'
