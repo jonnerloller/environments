@@ -46,6 +46,7 @@ alias gs='git status -sb'
 alias gl='git log --oneline --decorate --graph -20'
 alias gcob='git checkout -b'
 alias tma='tmux new -A -s main'
+alias reinit_env='bash $HOME/repo/environments/scripts/reinit_env.sh'
 
 # Usage: mhost user@host
 mhost() {

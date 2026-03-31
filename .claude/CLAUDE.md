@@ -21,5 +21,5 @@
 - Claude config is symlinked from there into `~/.claude/`
 - Tool-agnostic rules/skills live in `~/repo/environments/.llms/`
 - **Never put secrets, API keys, tokens, or credentials in this repo.** Auth stays in local-only files (`settings.local.json`, `.env`, `.credentials.json`).
-- At the start of a session, run `git -C ~/repo/environments pull` to stay up-to-date.
+- `scripts/reinit_env.sh` pulls the repo and re-applies all symlinks. It runs automatically via a `UserPromptSubmit` hook before every prompt.
 - After any change to files in `~/repo/environments/`, commit and `git -C ~/repo/environments push`.
