@@ -26,4 +26,5 @@
 - Tool-agnostic rules/skills live in `~/repo/environments/.llms/`
 - **Never put secrets, API keys, tokens, or credentials in this repo.** Auth stays in local-only files (`settings.local.json`, `.env`, `.credentials.json`).
 - `scripts/reinit_env.sh` pulls the repo and re-applies all symlinks. It runs automatically via a `UserPromptSubmit` hook before every prompt.
+- Before editing any file in `~/repo/environments/`, run `git -C ~/repo/environments pull --rebase` first.
 - After any change to files in `~/repo/environments/`, commit and `git -C ~/repo/environments push`.
