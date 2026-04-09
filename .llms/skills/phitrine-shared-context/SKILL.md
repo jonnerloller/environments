@@ -22,6 +22,9 @@ Use this skill when the task involves any of the following:
 
 - Read `~/.llms/rules/style.md` for any code, config, automation, or repo-maintenance task
 - Read `~/.llms/rules/homelab.md` when the task touches homelab infrastructure, Docker, networking, domains, ports, or service deployment
+- Read `~/.llms/rules/secondbrain.md` when the task references the Obsidian vault, project/task notes, or second-brain content
+
+Prefer `phitrine-bootstrap-context` as the general shared bootstrap skill on new machines; use this skill as the narrower environments/homelab specialization.
 
 ## Working Conventions
 

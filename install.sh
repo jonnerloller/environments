@@ -46,6 +46,8 @@ for skill_dir in "$REPO_DIR/.llms/skills"/*; do
   [ -d "$skill_dir" ] || continue
   ln -sfn "$skill_dir" "$HOME/.codex/skills/$(basename "$skill_dir")"
 done
+# Ensure a stable general bootstrap/context skill is always present for shared repo-backed rules
+ln -sfn "$REPO_DIR/.llms/skills/phitrine-bootstrap-context" "$HOME/.codex/skills/phitrine-bootstrap-context"
 
 echo "[6/7] Making zsh your default shell..."
 if command -v zsh >/dev/null 2>&1; then
