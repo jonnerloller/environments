@@ -32,22 +32,13 @@ ln -sf "$REPO_DIR/dotfiles/ssh/config" "$HOME/.ssh/config"
 chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/config"
 
-echo "[5/7] Linking AI agent configs..."
-# Claude Code — symlink individual config files (not the whole dir)
-mkdir -p "$HOME/.claude"
-ln -sf "$REPO_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-ln -sf "$REPO_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
-ln -sfn "$REPO_DIR/.claude/commands" "$HOME/.claude/commands"
-# LLMs — tool-agnostic rules/skills (whole directory)
+echo "[5/7] Linking shared AI intelligence..."
+# Shared LLM intelligence — cross-tool rules/skills/agents live here
 ln -sfn "$REPO_DIR/.llms" "$HOME/.llms"
-# Codex — keep local state in ~/.codex, but discover shared skills from ~/.llms
-mkdir -p "$HOME/.codex/skills"
-for skill_dir in "$REPO_DIR/.llms/skills"/*; do
-  [ -d "$skill_dir" ] || continue
-  ln -sfn "$skill_dir" "$HOME/.codex/skills/$(basename "$skill_dir")"
-done
-# Ensure a stable general bootstrap/context skill is always present for shared repo-backed rules
-ln -sfn "$REPO_DIR/.llms/skills/phitrine-bootstrap-context" "$HOME/.codex/skills/phitrine-bootstrap-context"
+
+echo "[5.1/7] Claude bootstrap is opt-in..."
+echo "If desired, manually point Claude at: $REPO_DIR/.claude/CLAUDE.md"
+echo "This install script does not replace or take over ~/.claude by default."
 
 echo "[6/7] Making zsh your default shell..."
 if command -v zsh >/dev/null 2>&1; then

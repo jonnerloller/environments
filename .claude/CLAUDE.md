@@ -1,30 +1,58 @@
-# Global Claude Instructions
+# Claude Bootstrap For Environments Repo
 
-## Environment
-- Server: phi-0 (homelab)
-- Docker works without `sudo` (user is in the docker group)
-- All Docker services live in `~/docker/<service-name>/`, each with their own `docker-compose.yml`
+This file is an **opt-in bootstrap entrypoint** for Claude on machines that use Jonathan's shared environments repo.
 
-## Homelab Conventions
-- Reverse proxy: Caddy with `tls internal` (self-signed certs)
-- Service domains: `<service>.services.phitrine.com`
-- Host domains: `<host>.home.phitrine.com`
-- DNS: 10.0.0.1
-- Running services: Homepage (:3000), Immich (:2283), Plex, TrueNAS, Proxmox, AirTrail (:3001)
+Do not assume this repo owns the machine's full Claude setup.
+Do not assume `~/.claude/` should be replaced wholesale.
+Prefer compatibility with existing local Claude configuration.
 
-## Git
-- Always use SSH URLs for git remotes, never HTTPS. If a repo uses HTTPS, switch it to SSH (`git remote set-url origin git@github.com:<owner>/<repo>.git`).
-- Per-repo exceptions will be noted in that repo's CLAUDE.md.
+## Purpose
 
-## Code Style
-- Keep it simple. No over-engineering.
-- Prefer shell scripts for automation tasks.
+Use this file to teach Claude where shared rules, skills, and environment metadata live.
 
-## Environments Repo
-- Dotfiles, AI agent configs, and skills live in `~/repo/environments/`
-- Claude config is symlinked from there into `~/.claude/`
-- Tool-agnostic rules/skills live in `~/repo/environments/.llms/`
-- **Never put secrets, API keys, tokens, or credentials in this repo.** Auth stays in local-only files (`settings.local.json`, `.env`, `.credentials.json`).
-- `scripts/reinit_env.sh` pulls the repo and re-applies all symlinks. It runs automatically via a `UserPromptSubmit` hook before every prompt.
-- Before editing any file in `~/repo/environments/`, run `git -C ~/repo/environments pull --rebase` first.
-- After any change to files in `~/repo/environments/`, commit and `git -C ~/repo/environments push`.
+Shared source of truth:
+
+- rules: `~/repo/environments/.llms/rules/`
+- skills: `~/repo/environments/.llms/skills/`
+- shared agent conventions: `~/repo/environments/.llms/agents/`
+- machine metadata: `~/repo/environments/machines/`
+
+## Loading Guidance
+
+When relevant to the task, load the appropriate shared rules from `.llms/`:
+
+- `style.md` for code, config, automation, repo maintenance, or shell work
+- `homelab.md` for services, Docker, networking, domains, ports, infra, or deployment work
+- `secondbrain.md` for Obsidian, projects, notes, or second-brain tasks
+- `cpp.md` for C++ parsing, streams, engine, or low-level systems work
+
+Prefer shared `.llms` rules over stale duplicated local copies.
+
+## Path Discipline
+
+Machine-specific paths belong in `~/repo/environments/machines/*.env`.
+
+When path-sensitive behavior depends on the machine, consult those machine env files instead of assuming one hardcoded path.
+
+## Local State Boundary
+
+Keep local-only Claude state outside this repo, including:
+
+- auth
+- credentials
+- history
+- caches
+- local settings overrides
+- machine-specific preferences not meant to be shared
+
+## Adoption Model
+
+This setup is intentionally opt-in.
+
+A machine may:
+
+- use this file directly
+- reference this file from a richer local Claude setup
+- selectively copy only the relevant bootstrap guidance
+
+Do not force full replacement of an existing Claude environment unless explicitly requested.
