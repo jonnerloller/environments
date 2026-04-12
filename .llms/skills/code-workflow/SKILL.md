@@ -75,8 +75,9 @@ Before finalizing:
    - `CLAUDE.md`
    - `README.md` / `CONTRIBUTING.md`
    - package/tool config scripts (Makefile, package.json, justfile, tox.ini, etc.)
-2. Follow their test/lint/PR conventions.
-3. Do not skip tests unless user explicitly approves.
+2. If the task is in C++, also load `~/.llms/rules/cpp.md`.
+3. Follow their test/lint/PR conventions.
+4. Do not skip tests unless user explicitly approves.
 
 ## 6) Commit, push, and share URL
 

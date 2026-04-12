@@ -28,6 +28,8 @@ Read these depending on task scope:
    - Load for Docker, networking, services, domains, Caddy, ports, infra, or deployment work.
 3. `~/.llms/rules/secondbrain.md`
    - Load when the task references second brain, Obsidian, notes, projects, tasks, or vault content.
+4. `~/.llms/rules/cpp.md`
+   - Load for C++ implementation, parsing, stream-reading, engine, or low-level systems code.
 
 If multiple apply, load all relevant rule files.
 
