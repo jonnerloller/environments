@@ -1,4 +1,20 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(sudo docker:*)",
+      "Bash(docker compose:*)",
+      "Bash(systemctl:*)",
+      "Bash(journalctl:*)",
+      "Bash(sudo ss:*)",
+      "Bash(openssl rand:*)",
+      "WebSearch",
+      "Bash(conan install:*)",
+      "Bash(dpkg -l)",
+      "Bash(ls /usr/lib/x86_64-linux-gnu/libGL*)"
+    ]
+  },
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -9,18 +25,6 @@
           }
         ]
       }
-    ]
-  },
-  "permissions": {
-    "allow": [
-      "Bash(git:*)",
-      "Bash(sudo docker:*)",
-      "Bash(docker compose:*)",
-      "Bash(systemctl:*)",
-      "Bash(journalctl:*)",
-      "Bash(sudo ss:*)",
-      "Bash(openssl rand:*)",
-      "WebSearch"
     ]
   }
 }
