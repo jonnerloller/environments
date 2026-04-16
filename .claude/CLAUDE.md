@@ -19,7 +19,9 @@ Shared source of truth:
 
 ## Loading Guidance
 
-When relevant to the task, load the appropriate shared rules from `.llms/`:
+`task-discipline.md` is always active — load it at the start of every session regardless of task type.
+
+When relevant to the task, also load the appropriate domain rules from `.llms/rules/`:
 
 - `style.md` for code, config, automation, repo maintenance, or shell work
 - `homelab.md` for services, Docker, networking, domains, ports, infra, or deployment work
