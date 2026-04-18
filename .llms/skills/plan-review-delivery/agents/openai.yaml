@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Review Delivery"
+  short_description: "Plan, review, commit, and PR long non-trivial tasks."
+  default_prompt: "Use the plan-review-delivery workflow for this long or non-trivial task: first propose a plan for review, then execute approved tasks with an active TODO list, per-task commits, and a final pull request URL."

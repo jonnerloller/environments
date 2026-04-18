@@ -12,6 +12,11 @@ causes subtle continuity errors.
 Before writing any code or making any changes, create a TODO list with
 `TodoWrite` that covers every step you plan to take.
 
+For long, non-trivial specs or broad "go fix this" implementation requests,
+load `~/.llms/skills/plan-review-delivery/SKILL.md` before editing. In that
+workflow, first propose a plan and wait for explicit user approval; create the
+active TODO list only after the plan is approved.
+
 Format each item as:
 
 ```
