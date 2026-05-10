@@ -2,6 +2,7 @@
 
 - Keep it simple. No over-engineering.
 - Prefer shell scripts (bash) for automation and system tasks.
+- For cron jobs and recurring automation, invoke a script directly whenever possible; only use a model when smart inference or dynamic wording is genuinely needed.
 - Use `set -euo pipefail` in all shell scripts.
 - Prefer `ln -sf` for symlinks (force overwrite).
 - When writing configs (YAML, TOML, etc.), include comments explaining non-obvious values.

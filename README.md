@@ -16,7 +16,8 @@ It should not assume full ownership of a machine's existing Claude or other agen
 - `envs/` — local-only runtime env files and user-service setup (never commit secrets)
 - `machines/` — machine-specific paths and environment metadata
 - `dotfiles/` — shared Unix shell/dev config such as zsh, tmux, ssh
-- `scripts/` — shared automation helpers, including reminder senders and setup scripts
+- `scripts/` — shared automation helpers, including reminder senders, cron entrypoints, and setup scripts
+- `scripts/automation/` — canonical script-first entrypoints for recurring automation
 - `scripts/powershell/` — shared PowerShell scripts and profile startup snippets
 - `install.sh` — Unix/dev setup helper that links shared `.llms/` and shell config without replacing full Claude config
 

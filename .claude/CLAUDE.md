@@ -27,6 +27,7 @@ When relevant to the task, also load the appropriate domain rules from `.llms/ru
 - `homelab.md` for services, Docker, networking, domains, ports, infra, or deployment work
 - `secondbrain.md` for Obsidian, projects, notes, or second-brain tasks
 - `cpp.md` for C++ parsing, streams, engine, or low-level systems work
+- `reminders.md` for Telegram messaging, notification scripts, or scheduled reminders
 
 Prefer shared `.llms` rules over stale duplicated local copies.
 
