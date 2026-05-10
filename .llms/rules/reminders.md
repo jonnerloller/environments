@@ -10,6 +10,12 @@ Use a direct sender script plus cron/systemd timers instead of an agent model wh
 - at a fixed time
 - with no need to inspect files, messages, calendar, or recent context
 
+For cron-backed automation, prefer a thin script entrypoint first:
+
+- cron/job text should say "run this script"
+- the script should do the work directly
+- only use a model when the job actually needs reasoning or dynamic wording
+
 ## Telegram reminder layout
 
 - Local secret env file: `envs/telegram/telegram.env`
