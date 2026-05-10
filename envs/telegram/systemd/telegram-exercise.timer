@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly Telegram exercise reminder timer
+
+[Timer]
+# Hourly at :15 in Pacific time, from morning through evening.
+OnCalendar=*-*-* 08..20:15:00 America/Los_Angeles
+Persistent=true
+Unit=telegram-exercise.service
+
+[Install]
+WantedBy=timers.target

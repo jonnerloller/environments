@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Telegram journal reminder timer
+
+[Timer]
+# Evening Pacific reminder.
+OnCalendar=*-*-* 21:00:00 America/Los_Angeles
+Persistent=true
+Unit=telegram-journal.service
+
+[Install]
+WantedBy=timers.target

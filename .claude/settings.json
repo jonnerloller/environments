@@ -11,7 +11,8 @@
       "WebSearch",
       "Bash(conan install:*)",
       "Bash(dpkg -l)",
-      "Bash(ls /usr/lib/x86_64-linux-gnu/libGL*)"
+      "Bash(ls /usr/lib/x86_64-linux-gnu/libGL*)",
+      "Bash(echo \"exit: $?\")"
     ]
   },
   "model": "opus",

@@ -11,3 +11,4 @@ For Codex, that means:
 
 - Shared source of truth: `~/.llms/`
 - Local working memory/state: `~/.codex/`
+- Machine-local runtime secrets and timer/env files live in repo-local `envs/` folders (for example `envs/telegram/telegram.env`), but the secret files themselves stay untracked.

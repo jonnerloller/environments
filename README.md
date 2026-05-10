@@ -13,10 +13,22 @@ It should not assume full ownership of a machine's existing Claude or other agen
 
 - `.llms/` — shared cross-tool rules, skills, and agent coordination
 - `.claude/` — Claude bootstrap guidance and Claude-specific shared assets
+- `envs/` — local-only runtime env files and user-service setup (never commit secrets)
 - `machines/` — machine-specific paths and environment metadata
 - `dotfiles/` — shared Unix shell/dev config such as zsh, tmux, ssh
+- `scripts/` — shared automation helpers, including reminder senders and setup scripts
 - `scripts/powershell/` — shared PowerShell scripts and profile startup snippets
 - `install.sh` — Unix/dev setup helper that links shared `.llms/` and shell config without replacing full Claude config
+
+## Telegram reminders
+
+Static Telegram reminders live under `envs/telegram/`:
+
+- `envs/telegram/telegram.env` — local-only Bot API credentials (copy from the example)
+- `envs/telegram/systemd/` — user timer/service units for the reminder schedule
+- `scripts/telegram/send_telegram_message.sh` — Bot API sender used by the units
+
+These reminders are intentionally model-free: they just send fixed messages on a schedule.
 
 ## Shared Agent Model
 

@@ -33,6 +33,20 @@ This is a lightweight bootstrap document for Claude, not a mandate to own all of
 
 Use this for machine-specific paths and environment details.
 
+### Local runtime envs
+
+`~/repo/environments/envs/*/`
+
+Use these folders for machine-local runtime state that should stay out of git, such as Telegram bot tokens, chat IDs, or other service-specific secrets.
+
+Keep the secret file itself untracked and provide a checked-in `*.example` file next to it.
+
+### User timers and cron
+
+When a reminder is just a fixed message on a schedule, prefer a direct sender script plus systemd user timers (or cron if that is a better fit on the target machine).
+
+Keep the schedule and the local secret env file together under the matching `envs/<service>/` folder so future agents can find both quickly.
+
 ## Adoption Patterns
 
 ### 1. Minimal opt-in
