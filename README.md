@@ -25,11 +25,11 @@ It should not assume full ownership of a machine's existing Claude or other agen
 
 Static Telegram reminders live under `envs/telegram/`:
 
-- `envs/telegram/telegram.env` — local-only Bot API credentials (copy from the example)
-- `envs/telegram/systemd/` — user timer/service units for the reminder schedule
-- `scripts/telegram/send_telegram_message.sh` — Bot API sender used by the units
+- `envs/telegram/telegram.env` — local-only Bot API credentials (copy from the example only if a legacy consumer still needs it)
+- `envs/telegram/systemd/` — legacy user timer/service units for the reminder schedule
+- `scripts/telegram/send_telegram_message.sh` — sender used by the reminders
 
-These reminders are intentionally model-free: they just send fixed messages on a schedule.
+The daily journal reminder now lives in user crontab and calls the fixed sender script directly.
 
 ## Shared Agent Model
 

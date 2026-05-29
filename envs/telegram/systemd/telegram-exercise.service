@@ -1,8 +1,7 @@
 [Unit]
 Description=Telegram exercise reminder
-ConditionPathExists=%h/repo/environments/envs/telegram/telegram.env
 
 [Service]
 Type=oneshot
-EnvironmentFile=%h/repo/environments/envs/telegram/telegram.env
+Environment=APPRISE_BASE_URL=http://localhost:8000
 ExecStart=%h/repo/environments/scripts/telegram/send_telegram_message.sh --message "Exercise check: stand up and move for 5 minutes. Walk, stretch, push-ups, sit-ups, or anything else counts."

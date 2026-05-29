@@ -4,6 +4,16 @@
 # now live in Apprise (configured by scripts/apprise/refresh_configs.sh).
 set -euo pipefail
 
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+MACHINE_ENV="${OPENCLAW_MACHINE_ENV:-$ROOT/machines/phi-0.env}"
+
+if [[ -f "$MACHINE_ENV" ]]; then
+  # shellcheck disable=SC1090
+  set -a
+  source "$MACHINE_ENV"
+  set +a
+fi
+
 usage() {
   cat <<'EOT'
 usage:
