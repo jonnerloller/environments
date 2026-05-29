@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
+# Send a Telegram message via the central Apprise service.
+# Same CLI as the previous direct-Bot-API version; bot token / chat id
+# now live in Apprise (configured by scripts/apprise/refresh_configs.sh).
 set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+MACHINE_ENV="${OPENCLAW_MACHINE_ENV:-$ROOT/machines/phi-0.env}"
+
+if [[ -f "$MACHINE_ENV" ]]; then
+  # shellcheck disable=SC1090
+  set -a
+  source "$MACHINE_ENV"
+  set +a
+fi
 
 usage() {
   cat <<'EOT'
@@ -8,10 +21,8 @@ usage:
   send_telegram_message.sh "text"
 
 env:
-  TELEGRAM_BOT_TOKEN   required
-  TELEGRAM_CHAT_ID     required
-  TELEGRAM_API_BASE    optional, defaults to https://api.telegram.org
-  TELEGRAM_DISABLE_NOTIFICATION optional, 1 to silence the ping
+  APPRISE_BASE_URL   optional, defaults to https://apprise.services.phitrine.com
+  APPRISE_KEY        optional, defaults to "telegram"
 EOT
 }
 
@@ -47,14 +58,9 @@ if [[ -z "$MESSAGE" ]]; then
   exit 2
 fi
 
-: "${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN is required}"
-: "${TELEGRAM_CHAT_ID:?TELEGRAM_CHAT_ID is required}"
+BASE="${APPRISE_BASE_URL:-https://apprise.services.phitrine.com}"
+KEY="${APPRISE_KEY:-telegram}"
 
-API_BASE="${TELEGRAM_API_BASE:-https://api.telegram.org}"
-DISABLE_NOTIFICATION="${TELEGRAM_DISABLE_NOTIFICATION:-0}"
-
-curl -fsS --connect-timeout 10 --max-time 30 \
-  --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
-  --data-urlencode "text=${MESSAGE}" \
-  --data-urlencode "disable_notification=${DISABLE_NOTIFICATION}" \
-  "${API_BASE}/bot${TELEGRAM_BOT_TOKEN}/sendMessage" >/dev/null
+curl -fsS --connect-timeout 10 --max-time 30 -X POST \
+  --data-urlencode "body=${MESSAGE}" \
+  "${BASE}/notify/${KEY}" >/dev/null

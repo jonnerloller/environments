@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ARCHIVE_PATH="${JAPANESE_WORD_ARCHIVE:-$HOME/Obsidian/valhalla/Resources/Japanese Word Lookup Archive.md}"
+ARCHIVE_PATH="${JAPANESE_WORD_ARCHIVE:-$HOME/Obsidian/valhalla/Learning/Japanese/Japanese Word Lookup Archive.md}"
 TODAY_UTC="$(date -u +%F)"
 
 WORD="${1:-}"

@@ -1,8 +1,7 @@
 [Unit]
 Description=Telegram daily journal reminder
-ConditionPathExists=%h/repo/environments/envs/telegram/telegram.env
 
 [Service]
 Type=oneshot
-EnvironmentFile=%h/repo/environments/envs/telegram/telegram.env
+Environment=APPRISE_BASE_URL=http://localhost:8000
 ExecStart=%h/repo/environments/scripts/telegram/send_telegram_message.sh --message "Daily journal check: write anything interesting, your current mental state, or one thing you're grateful for. You can write it here or in your second brain."

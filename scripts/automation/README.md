@@ -15,6 +15,8 @@ Available scripts:
 - `call_empty_dailies.sh`
 - `cull_empty_dailies.py`
 - `create_daily_journal_note.py`
+- `journal.py`
 - `send_daily_journal_reminder.sh`
 - `send_exercise_reminder.sh`
+- `systemcron.sh`
 - `update_ports_registry.py`

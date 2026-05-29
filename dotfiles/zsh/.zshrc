@@ -40,6 +40,12 @@ _machine_env="$HOME/repo/environments/machines/$(hostname -s).env"
 [[ -f "$_machine_env" ]] && set -a && source "$_machine_env" && set +a
 unset _machine_env
 
+# --- Dashlane CLI device key (local-only file, not committed) ---
+[[ -f "$HOME/.config/dcli/device.env" ]] && source "$HOME/.config/dcli/device.env"
+
+# --- gog (Google CLI) keyring password (local-only file, not committed) ---
+[[ -f "$HOME/.config/gogcli/keyring.env" ]] && source "$HOME/.config/gogcli/keyring.env"
+
 # Handy aliases
 alias ll='ls -lah'
 alias gs='git status -sb'
@@ -52,3 +58,5 @@ alias reinit_env='bash $HOME/repo/environments/scripts/reinit_env.sh'
 mhost() {
   mosh "$1" -- tmux new -A -s main
 }
+
+

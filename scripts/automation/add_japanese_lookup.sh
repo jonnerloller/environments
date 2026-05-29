@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ARCHIVE_PATH="${JAPANESE_STUDY_ARCHIVE:-$HOME/Obsidian/valhalla/Resources/Japanese Study Lookup Archive.md}"
+ARCHIVE_PATH="${JAPANESE_STUDY_ARCHIVE:-$HOME/Obsidian/valhalla/Learning/Japanese/Japanese Study Lookup Archive.md}"
 TODAY_UTC="$(date -u +%F)"
 KIND="${1:-}"
 QUERY="${2:-}"

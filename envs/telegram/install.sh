@@ -14,7 +14,8 @@ for unit in "$UNIT_DIR"/*.service "$UNIT_DIR"/*.timer; do
 done
 
 systemctl --user daemon-reload
-systemctl --user enable --now telegram-exercise.timer telegram-journal.timer
+systemctl --user enable --now telegram-exercise.timer
 
-echo "Installed Telegram reminders from $REPO_ROOT"
+echo "Installed Telegram exercise timer from $REPO_ROOT"
+echo "Daily journal reminders now live in user crontab via systemcron."
 echo "If needed, copy $SCRIPT_DIR/telegram.env.example to $SCRIPT_DIR/telegram.env first."
