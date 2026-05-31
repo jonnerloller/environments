@@ -26,7 +26,7 @@ Bitwarden (telegram_clawphi)
 - `install.sh` — symlinks systemd user units and enables the exercise timer only
 - `systemd/` — legacy user timer/service units (exercise reminder only)
 
-Daily journal reminders now run from user crontab via `scripts/automation/send_daily_journal_reminder.sh`.
+Daily journal reminders now run from user crontab via `scripts/automation/send_daily_journal_reminder.sh` and send at 9:00 PM Pacific time.
 
 ## First-time setup on a new machine
 

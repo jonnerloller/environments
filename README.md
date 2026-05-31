@@ -29,7 +29,7 @@ Static Telegram reminders live under `envs/telegram/`:
 - `envs/telegram/systemd/` — legacy user timer/service units for the reminder schedule
 - `scripts/telegram/send_telegram_message.sh` — sender used by the reminders
 
-The daily journal reminder now lives in user crontab and calls the fixed sender script directly.
+The daily journal reminder now lives in user crontab and runs at 9:00 PM Pacific time.
 
 ## Shared Agent Model
 
