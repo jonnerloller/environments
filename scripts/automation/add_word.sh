@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+usage() {
+  cat <<'EOF'
+usage:
+  add_word.sh <word> [reading] [meaning] [nuance] [example_jp] [example_en]
+
+notes:
+  - Deduplicates by word; appends under today's UTC date heading.
+  - Archive path override: JAPANESE_WORD_ARCHIVE
+  - Performs a local write; safe to introspect with -h/--help (no write).
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 ARCHIVE_PATH="${JAPANESE_WORD_ARCHIVE:-$HOME/Obsidian/valhalla/Learning/Japanese/Japanese Word Lookup Archive.md}"
 TODAY_UTC="$(date -u +%F)"
 
@@ -12,7 +29,7 @@ EXAMPLE_JP="${5:-}"
 EXAMPLE_EN="${6:-}"
 
 if [[ -z "$WORD" ]]; then
-  echo "Usage: add_word.sh <word> [reading] [meaning] [nuance] [example_jp] [example_en]" >&2
+  usage >&2
   exit 1
 fi
 

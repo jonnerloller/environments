@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+usage() {
+  cat <<'EOF'
+usage:
+  add_torrent.sh [--dry-run] <magnet-or-torrent-url>
+
+notes:
+  - Adds a torrent to Transmission via RPC.
+  - Env overrides: TRANSMISSION_ENV_FILE, TRANSMISSION_RPC_URL
+  - Performs an external write; use --dry-run to preview, -h/--help to introspect.
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 if [[ $# -lt 1 ]]; then
-  echo "usage: $0 [--dry-run] <magnet-or-torrent-url>"
+  usage >&2
   exit 2
 fi
 
@@ -13,7 +30,7 @@ if [[ "${1:-}" == "--dry-run" ]]; then
 fi
 
 if [[ $# -lt 1 ]]; then
-  echo "usage: $0 [--dry-run] <magnet-or-torrent-url>"
+  usage >&2
   exit 2
 fi
 

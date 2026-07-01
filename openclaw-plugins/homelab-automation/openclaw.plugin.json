@@ -1,0 +1,28 @@
+{
+  "id": "homelab-automation",
+  "name": "Homelab Automation",
+  "description": "Deterministic homelab command routing: slash commands and inferred requests dispatch to well-documented automation scripts (flights, Japanese words/lookups, torrents, journal).",
+  "version": "0.1.0",
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "scriptsDir": {
+        "type": "string",
+        "description": "Directory holding the automation scripts (add_flight.sh, etc.)."
+      }
+    }
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "flight_add",
+      "word_add",
+      "translate_add",
+      "lookup_add",
+      "torrent_add",
+      "journal_add"
+    ]
+  }
+}

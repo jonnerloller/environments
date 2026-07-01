@@ -9,6 +9,7 @@ These are not behavior rules — those live in `../rules/`. These are facts abou
 - [apprise.md](apprise.md) — central notification gateway (Apprise at `apprise.services.phitrine.com`); how to send, how to add channels
 - [caddy_tls.md](caddy_tls.md) — Caddy reverse proxy with publicly trusted Let's Encrypt certs via Cloudflare DNS-01; how to add services, recovery scenarios
 - [gog.md](gog.md) — `gog` Google CLI setup (Gmail/Drive/Calendar); file keyring + `GOG_KEYRING_PASSWORD`; restore steps from Bitwarden
+- [openclaw_automation_commands.md](openclaw_automation_commands.md) — how homelab slash commands (/addflight, /addword, /translate, /torrent, /journal) route deterministically via the `homelab-automation` tool plugin + `command-dispatch` skills; agent-allowlist and version gotchas
 - [openclaw_oauth.md](openclaw_oauth.md) — SSH port-forwarding pattern for openclaw's OAuth flow (1455 + 18789)
 - [openclaw_secrets.md](openclaw_secrets.md) — how openclaw's `openclaw.json` gets refreshed from Vaultwarden via `refresh_secrets.sh`; hot-reload semantics
 - [vaultwarden.md](vaultwarden.md) — self-hosted Bitwarden at `vault.services.phitrine.com`; `phi-0-agent` user; `bw` CLI via `~/.config/bw/agent.env`

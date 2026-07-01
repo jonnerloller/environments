@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+usage() {
+  cat <<'EOF'
+usage:
+  add_japanese_lookup.sh <word|translate|grammar|phrase> <query> [reading] [meaning] [concept_tags] [details]
+
+notes:
+  - Appends a study-lookup item under today's UTC date + kind section.
+  - Archive path override: JAPANESE_STUDY_ARCHIVE
+  - Performs a local write; safe to introspect with -h/--help (no write).
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 ARCHIVE_PATH="${JAPANESE_STUDY_ARCHIVE:-$HOME/Obsidian/valhalla/Learning/Japanese/Japanese Study Lookup Archive.md}"
 TODAY_UTC="$(date -u +%F)"
 KIND="${1:-}"
@@ -11,7 +28,7 @@ CONCEPT_TAGS="${5:-}"
 DETAILS="${6:-}"
 
 if [[ -z "$KIND" || -z "$QUERY" ]]; then
-  echo "Usage: add_japanese_lookup.sh <word|translate|grammar|phrase> <query> [reading] [meaning] [concept_tags] [details]" >&2
+  usage >&2
   exit 1
 fi
 
