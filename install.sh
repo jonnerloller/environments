@@ -1,13 +1,49 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_DIR="${HOME}/repo/environments"
+REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 
-echo "[1/6] Installing packages (zsh, tmux, mosh, autossh, git, curl)..."
-sudo apt-get update
-sudo apt-get install -y zsh tmux mosh autossh git curl
+install_packages() {
+  local os_release_file="${OS_RELEASE_FILE:-/etc/os-release}"
+  local distro_id=""
+  local distro_like=""
 
-echo "[2/5] Installing Oh My Zsh (unattended)..."
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    if ! command -v brew >/dev/null 2>&1; then
+      echo "Homebrew is required on macOS: https://brew.sh" >&2
+      exit 1
+    fi
+    brew install zsh tmux mosh autossh git curl
+    return
+  fi
+
+  if [[ -r "$os_release_file" ]]; then
+    # shellcheck disable=SC1090
+    source "$os_release_file"
+    distro_id="${ID:-}"
+    distro_like="${ID_LIKE:-}"
+  fi
+
+  case " $distro_id $distro_like " in
+    *" cachyos "*|*" arch "*)
+      sudo pacman -Syu --needed --noconfirm zsh tmux mosh autossh git curl
+      ;;
+    *" debian "*|*" ubuntu "*)
+      sudo apt-get update
+      sudo apt-get install -y zsh tmux mosh autossh git curl
+      ;;
+    *)
+      echo "Unsupported Linux distribution: ${distro_id:-unknown}" >&2
+      echo "Install zsh, tmux, mosh, autossh, git, and curl, then rerun this script." >&2
+      exit 1
+      ;;
+  esac
+}
+
+echo "[1/7] Installing packages (zsh, tmux, mosh, autossh, git, curl)..."
+install_packages
+
+echo "[2/7] Installing Oh My Zsh (unattended)..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -15,7 +51,7 @@ else
   echo "Oh My Zsh already installed"
 fi
 
-echo "[3/5] Installing zsh plugins..."
+echo "[3/7] Installing zsh plugins..."
 mkdir -p "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
@@ -36,15 +72,20 @@ echo "[5/7] Linking shared AI intelligence..."
 # Shared LLM intelligence — cross-tool rules/skills/agents live here
 ln -sfn "$REPO_DIR/.llms" "$HOME/.llms"
 
-echo "[5.1/7] Claude bootstrap is opt-in..."
+mkdir -p "$HOME/.codex/skills"
+for skill_dir in "$REPO_DIR/.llms/skills"/*; do
+  [[ -d "$skill_dir" ]] || continue
+  ln -sfn "$skill_dir" "$HOME/.codex/skills/$(basename "$skill_dir")"
+done
+
+echo "[6/7] Claude bootstrap is opt-in..."
 echo "If desired, manually point Claude at: $REPO_DIR/.claude/CLAUDE.md"
 echo "This install script does not replace or take over ~/.claude by default."
 
-echo "[6/7] Making zsh your default shell..."
+echo "[7/7] Making zsh your default shell..."
 if command -v zsh >/dev/null 2>&1; then
   chsh -s "$(command -v zsh)" "$USER" || true
 fi
 
-echo "[7/7] Notes"
 echo "For mosh on servers, allow UDP 60000-61000 (e.g., sudo ufw allow 60000:61000/udp)."
 echo "Done. Restart terminal (or run: exec zsh)."

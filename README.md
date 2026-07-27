@@ -19,7 +19,7 @@ It should not assume full ownership of a machine's existing Claude or other agen
 - `scripts/` — shared automation helpers, including reminder senders, cron entrypoints, and setup scripts
 - `scripts/automation/` — canonical script-first entrypoints for recurring automation
 - `scripts/powershell/` — shared PowerShell scripts and profile startup snippets
-- `install.sh` — Unix/dev setup helper that links shared `.llms/` and shell config without replacing full Claude config
+- `install.sh` — CachyOS/Arch, Debian/Ubuntu, and macOS setup helper that links shared `.llms/` and shell config without replacing full Claude config
 
 ## Telegram reminders
 
@@ -90,10 +90,42 @@ Shared rules and skills should refer to machine metadata via those env files rat
 
 ## New Machine Bootstrap
 
-Recommended baseline on a new Unix machine:
+Recommended baseline on a new CachyOS machine:
 
-1. clone `~/repo/environments`
-2. run `install.sh`
-3. verify `~/.llms -> ~/repo/environments/.llms`
-4. manually opt Claude into `~/repo/environments/.claude/CLAUDE.md` if desired
-5. keep local tool state in native tool directories
+1. Install CachyOS and complete its normal system update.
+2. Clone this repository wherever you keep source repositories, for example:
+
+   ```bash
+   mkdir -p ~/repo
+   git clone git@github.com:jonnerloller/environments.git ~/repo/environments
+   ```
+
+3. Run the installer from the clone:
+
+   ```bash
+   ~/repo/environments/install.sh
+   ```
+
+   On CachyOS the installer uses `pacman`. It also supports Arch Linux,
+   Debian/Ubuntu, and macOS with Homebrew.
+
+4. Copy `machines/cachyos.example.env` to a file named after the machine's short
+   hostname and adjust its paths:
+
+   ```bash
+   cp ~/repo/environments/machines/cachyos.example.env \
+     ~/repo/environments/machines/"$(hostname -s)".env
+   ```
+
+5. Restart the terminal and verify that `~/.llms` points into this repository.
+6. Keep credentials and other tool-local state in their native config folders.
+7. If repo-managed Claude configuration is wanted, run:
+
+   ```bash
+   ~/repo/environments/scripts/reinit_env.sh --manage-claude
+   ```
+
+For later updates, run `reinit_env`. The repository path is resolved from the
+installed symlinks, so the clone does not have to live at `~/repo/environments`.
+
+The same installer remains the baseline for other supported Unix machines.
