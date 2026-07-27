@@ -72,6 +72,12 @@ echo "[5/7] Linking shared AI intelligence..."
 # Shared LLM intelligence — cross-tool rules/skills/agents live here
 ln -sfn "$REPO_DIR/.llms" "$HOME/.llms"
 
+mkdir -p "$HOME/.codex/skills"
+for skill_dir in "$REPO_DIR/.llms/skills"/*; do
+  [[ -d "$skill_dir" ]] || continue
+  ln -sfn "$skill_dir" "$HOME/.codex/skills/$(basename "$skill_dir")"
+done
+
 echo "[6/7] Claude bootstrap is opt-in..."
 echo "If desired, manually point Claude at: $REPO_DIR/.claude/CLAUDE.md"
 echo "This install script does not replace or take over ~/.claude by default."

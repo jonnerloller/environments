@@ -72,9 +72,14 @@ Only use when explicitly desired.
 
 `install.sh` should:
 
+- support the repository's CachyOS/Arch, Debian/Ubuntu, and macOS machines
 - set up Unix/dev defaults when wanted
 - link shared `.llms`
+- link shared skills into Codex without replacing Codex-local state
 - avoid taking over full Claude configuration by default
+
+`scripts/reinit_env.sh` follows the same policy. Pass `--manage-claude` only
+when the machine should use the repo-managed Claude files.
 
 ## Why
 
