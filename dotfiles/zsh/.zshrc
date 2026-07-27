@@ -36,7 +36,8 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # --- Machine-specific paths ---
-_machine_env="$HOME/repo/environments/machines/$(hostname -s).env"
+_environments_repo="${${(%):-%N}:A:h:h:h}"
+_machine_env="$_environments_repo/machines/$(hostname -s).env"
 [[ -f "$_machine_env" ]] && set -a && source "$_machine_env" && set +a
 unset _machine_env
 
@@ -52,11 +53,10 @@ alias gs='git status -sb'
 alias gl='git log --oneline --decorate --graph -20'
 alias gcob='git checkout -b'
 alias tma='tmux new -A -s main'
-alias reinit_env='bash $HOME/repo/environments/scripts/reinit_env.sh'
+alias reinit_env="bash $_environments_repo/scripts/reinit_env.sh"
+unset _environments_repo
 
 # Usage: mhost user@host
 mhost() {
   mosh "$1" -- tmux new -A -s main
 }
-
-

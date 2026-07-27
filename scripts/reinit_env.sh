@@ -1,18 +1,37 @@
 #!/usr/bin/env bash
-# Sync environments repo and re-apply symlinks for the current machine.
-# Safe to run anytime — only creates/updates symlinks, never deletes data.
+# Sync the environments repo and re-apply shared symlinks.
 #
-# When called from a PreToolUse hook, pass --once to skip if already run
-# this Claude session (keyed on $PPID so each session runs it exactly once).
+# Options:
+#   --once            Skip if already run by this parent process.
+#   --manage-claude   Link the repo-managed Claude files into ~/.claude.
 set -euo pipefail
 
-if [[ "${1:-}" == "--once" ]]; then
+RUN_ONCE=false
+MANAGE_CLAUDE=false
+
+for arg in "$@"; do
+  case "$arg" in
+    --once)
+      RUN_ONCE=true
+      ;;
+    --manage-claude)
+      MANAGE_CLAUDE=true
+      ;;
+    *)
+      echo "Unknown option: $arg" >&2
+      echo "Usage: $0 [--once] [--manage-claude]" >&2
+      exit 2
+      ;;
+  esac
+done
+
+if [[ "$RUN_ONCE" == true ]]; then
   LOCK="/tmp/reinit_env_done_${PPID}"
   [[ -f "$LOCK" ]] && exit 0
   touch "$LOCK"
 fi
 
-REPO_DIR="${HOME}/repo/environments"
+REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 
 # Pull latest
 git -C "$REPO_DIR" pull --ff-only --quiet
@@ -25,11 +44,13 @@ ln -sf "$REPO_DIR/dotfiles/ssh/config" "$HOME/.ssh/config"
 chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/config"
 
-# Claude Code
-mkdir -p "$HOME/.claude"
-ln -sf "$REPO_DIR/.claude/CLAUDE.md"      "$HOME/.claude/CLAUDE.md"
-ln -sf "$REPO_DIR/.claude/settings.json"  "$HOME/.claude/settings.json"
-ln -sfn "$REPO_DIR/.claude/commands"      "$HOME/.claude/commands"
+# Claude Code is opt-in because these links replace existing configuration.
+if [[ "$MANAGE_CLAUDE" == true ]]; then
+  mkdir -p "$HOME/.claude"
+  ln -sf "$REPO_DIR/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+  ln -sf "$REPO_DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+  ln -sfn "$REPO_DIR/.claude/commands" "$HOME/.claude/commands"
+fi
 
 # Tool-agnostic LLM rules/skills
 ln -sfn "$REPO_DIR/.llms" "$HOME/.llms"
