@@ -1,0 +1,6 @@
+# Keep filesystem writes scoped to the workspace while allowing package,
+# documentation, GitHub, and other outbound network access.
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = true
