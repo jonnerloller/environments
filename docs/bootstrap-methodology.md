@@ -81,6 +81,23 @@ Only use when explicitly desired.
 `scripts/reinit_env.sh` follows the same policy. Pass `--manage-claude` only
 when the machine should use the repo-managed Claude files.
 
+## Component Bootstrap Commands
+
+Focused configuration installers live in `scripts/bootstrap/` and use the
+`env_bootstrap_<component>` naming convention. The managed Zsh configuration
+adds that directory to `PATH`, so typing `env_bootstrap_` and pressing Tab
+lists the available component bootstrap commands.
+
+For example:
+
+```bash
+env_bootstrap_alacritty
+```
+
+Component bootstrap commands should be safe to rerun. When adopting an
+existing unmanaged config, preserve it as a timestamped backup before linking
+the repo-managed file.
+
 ## Why
 
 This avoids breaking machines with more complicated Claude setups while still giving a single shared source of truth for reusable intelligence.
