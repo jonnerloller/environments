@@ -24,23 +24,33 @@ install_packages() {
     distro_like="${ID_LIKE:-}"
   fi
 
-  case " $distro_id $distro_like " in
-    *" cachyos "*|*" arch "*)
+  case "$distro_id" in
+    cachyos)
+      "$REPO_DIR/scripts/bootstrap/env_bootstrap_cachyos_packages"
+      ;;
+    arch)
       sudo pacman -Syu --needed --noconfirm zsh tmux mosh autossh git curl
       ;;
-    *" debian "*|*" ubuntu "*)
-      sudo apt-get update
-      sudo apt-get install -y zsh tmux mosh autossh git curl
-      ;;
     *)
-      echo "Unsupported Linux distribution: ${distro_id:-unknown}" >&2
-      echo "Install zsh, tmux, mosh, autossh, git, and curl, then rerun this script." >&2
-      exit 1
+      case " $distro_id $distro_like " in
+        *" arch "*)
+          sudo pacman -Syu --needed --noconfirm zsh tmux mosh autossh git curl
+          ;;
+        *" debian "*|*" ubuntu "*)
+          sudo apt-get update
+          sudo apt-get install -y zsh tmux mosh autossh git curl
+          ;;
+        *)
+          echo "Unsupported Linux distribution: ${distro_id:-unknown}" >&2
+          echo "Install zsh, tmux, mosh, autossh, git, and curl, then rerun this script." >&2
+          exit 1
+          ;;
+      esac
       ;;
   esac
 }
 
-echo "[1/7] Installing packages (zsh, tmux, mosh, autossh, git, curl)..."
+echo "[1/7] Installing platform packages..."
 install_packages
 
 echo "[2/7] Installing Oh My Zsh (unattended)..."

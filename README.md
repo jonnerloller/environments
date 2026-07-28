@@ -106,8 +106,9 @@ Recommended baseline on a new CachyOS machine:
    ~/repo/environments/install.sh
    ```
 
-   On CachyOS the installer uses `pacman`. It also supports Arch Linux,
-   Debian/Ubuntu, and macOS with Homebrew.
+   On CachyOS the installer uses `pacman` with the canonical package list in
+   `packages/cachyos.txt`. It also supports Arch Linux, Debian/Ubuntu, and
+   macOS with Homebrew.
 
 4. Copy `machines/cachyos.example.env` to a file named after the machine's short
    hostname and adjust its paths:

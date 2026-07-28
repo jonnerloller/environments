@@ -1,0 +1,17 @@
+# Core shell and remote-session tools
+zsh
+tmux
+mosh
+autossh
+
+# Development essentials
+git
+curl
+
+# Terminal environment
+alacritty
+
+# Agent and repository tooling
+github-cli
+openai-codex
+claude-code
