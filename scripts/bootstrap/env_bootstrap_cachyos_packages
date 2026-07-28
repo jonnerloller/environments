@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+PACKAGE_MANIFEST="$REPO_DIR/packages/cachyos.txt"
+packages=()
+
+while IFS= read -r package_name; do
+  [[ -n "$package_name" && "$package_name" != \#* ]] || continue
+  packages+=("$package_name")
+done <"$PACKAGE_MANIFEST"
+
+if [[ "${#packages[@]}" -eq 0 ]]; then
+  echo "No packages found in $PACKAGE_MANIFEST" >&2
+  exit 1
+fi
+
+echo "Installing CachyOS packages from $PACKAGE_MANIFEST..."
+sudo pacman -Syu --needed --noconfirm "${packages[@]}"
