@@ -37,6 +37,7 @@ bindkey '^[[B' history-substring-search-down
 
 # --- Machine-specific paths ---
 _environments_repo="${${(%):-%N}:A:h:h:h}"
+export PATH="$_environments_repo/scripts/bootstrap:$PATH"
 _machine_env="$_environments_repo/machines/$(hostname -s).env"
 [[ -f "$_machine_env" ]] && set -a && source "$_machine_env" && set +a
 unset _machine_env
