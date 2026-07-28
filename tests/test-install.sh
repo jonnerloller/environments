@@ -50,7 +50,7 @@ run_install_test() {
 run_install_test \
   "cachyos" \
   $'ID=cachyos\nID_LIKE=arch' \
-  "pacman -Syu --needed --noconfirm zsh tmux mosh autossh git curl"
+  "pacman -Syu --needed --noconfirm zsh tmux mosh autossh git curl alacritty github-cli openai-codex claude-code"
 
 run_install_test \
   "ubuntu" \

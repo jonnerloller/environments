@@ -92,11 +92,16 @@ For example:
 
 ```bash
 env_bootstrap_alacritty
+env_bootstrap_cachyos_packages
 ```
 
 Component bootstrap commands should be safe to rerun. When adopting an
 existing unmanaged config, preserve it as a timestamped backup before linking
 the repo-managed file.
+
+The canonical CachyOS package list lives in `packages/cachyos.txt`. Both the
+full environment installer and `env_bootstrap_cachyos_packages` consume this
+manifest, so package additions only need to be maintained in one place.
 
 ## Why
 
