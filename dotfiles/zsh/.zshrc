@@ -61,3 +61,7 @@ unset _environments_repo
 mhost() {
   mosh "$1" -- tmux new -A -s main
 }
+
+# >>> Codex installer >>>
+export PATH="/home/phitrine/.local/bin:$PATH"
+# <<< Codex installer <<<
